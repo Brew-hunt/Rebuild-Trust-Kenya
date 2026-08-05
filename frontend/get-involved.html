@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Get Involved — Rebuild Trust Kenya</title>
+  <meta name="description" content="Become a youth leader, partner with us, or support Rebuild Trust Kenya's peacebuilding and civic engagement work.">
+  
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- GSAP & ScrollTrigger Plugins -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+  
+  <!-- Main Application Script -->
+  <script src="main.js" defer></script>
+
+  
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site">
+  <div class="wrap nav">
+    <a class="brand" href="index.html">
+      <!-- Official Logo Image -->
+      <img class="brand-logo" src="./images/logo-removebg-preview.png" alt="Rebuild Trust Kenya Logo" width="48" height="48">
+      <span class="word">
+        Rebuild Trust Kenya
+        <small>Imani Leo. Amani Kesho!</small>
+      </span>
+    </a>
+    <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="links">
+      <a class="navlink" href="index.html">Home</a>
+      <a class="navlink" href="about.html">About</a>
+      <a class="navlink" href="programs.html">Programs</a>
+      <a class="navlink" href="impact.html">Impact</a>
+      <a class="btn solid magnet-btn" href="get-involved.html">Get Involved</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <div class="wrap" data-gsap="hero-text">
+      <p class="eyebrow">Get Involved</p>
+      <h1>Trust gets rebuilt by people who show up.</h1>
+      <p class="lede">Whether you're a young leader, a partner organization, or a supporter — there's a place for you in this work.</p>
+    </div>
+  </section>
+
+  <!-- OPPORTUNITIES GRID -->
+  <section>
+    <div class="wrap">
+      <div class="involve-grid" data-gsap="fade-up">
+        <div class="involve-card">
+          <span class="eyebrow">For Youth</span>
+          <h3>Become a youth leader</h3>
+          <p>Join the coordinators and facilitators leading dialogue, accountability, and civic education in your county.</p>
+          <a class="btn" href="#contact-form">Apply now</a>
+        </div>
+        <div class="involve-card">
+          <span class="eyebrow">For Organizations</span>
+          <h3>Partner with us</h3>
+          <p>County governments, NGOs, and civil society groups can help us scale the model into new counties.</p>
+          <a class="btn" href="#contact-form">Start a conversation</a>
+        </div>
+        <div class="involve-card">
+          <span class="eyebrow">For Everyone</span>
+          <h3>Support the work</h3>
+          <p>Help fund dialogue forums, training, and county coordination as we scale from 4 counties to 20+.</p>
+          <a class="btn" href="#contact-form">Get in touch</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HIDDEN IFRAME FOR SILENT BACKGROUND SUBMISSION -->
+  <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(window.submitted){showSuccessMessage();}"></iframe>
+
+  <!-- CONTACT FORM SECTION -->
+   <section class="alt contact-section">
+  <div class="wrap two-col" data-gsap="fade-up">
+    
+    <!-- LEFT COLUMN: CONTACT DETAILS & CARDS -->
+    <div class="contact-info-block">
+      <p class="eyebrow" id="contact-form">Get In Touch</p>
+      <h2>Tell us how you'd like to help.</h2>
+      <p class="lede">Fill in the form to get connected with our coordination team. Submissions are instantly logged with our county directors.</p>
+      
+      <div class="contact-cards-grid">
+        <div class="info-card">
+          <div class="info-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+          </div>
+          <div>
+            <span class="info-label">Email Us</span>
+            <a href="mailto:info@rebuildtrustkenya.org" class="info-val">info@rebuildtrustkenya.org</a>
+          </div>
+        </div>
+
+        <div class="info-card">
+          <div class="info-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+          </div>
+          <div>
+            <span class="info-label">Call / WhatsApp</span>
+            <span class="info-val">+254 780 004 812 / +254 795 750 596</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT COLUMN: GOOGLE FORM INTEGRATION -->
+    <div class="form-wrapper">
+      <form
+        action="https://docs.google.com/forms/d/e/1FAIpQLSfChQmJjQC6hHBvgtFgRP_wZyrZ7Z82-TsLspeJADqRvrGMpQ/formResponse"
+        method="POST"
+        target="hidden_iframe"
+        id="gform"
+        onsubmit="window.submitted=true;"
+        class="contact-form-enhanced"
+      >
+
+        <div class="field-group">
+          <div class="field">
+            <label for="name">Full Name *</label>
+            <input
+              type="text"
+              id="name"
+              name="entry.940891054"
+              required
+              placeholder="Jane Doe">
+          </div>
+
+          <div class="field">
+            <label for="phone">Phone / WhatsApp *</label>
+            <input
+              type="tel"
+              id="phone"
+              name="entry.1554997623"
+              required
+              pattern="[0-9]{10}"
+              maxlength="10"
+              minlength="10"
+              inputmode="numeric"
+              title="Please enter exactly 10 digits (e.g. 0712345678)"
+              placeholder="07XX XXX XXX">
+          </div>
+        </div>
+
+        <div class="field-group">
+          <div class="field">
+            <label for="email">Email Address</label>
+            <input
+              type="email"
+              id="email"
+              name="entry.1169325871"
+              placeholder="jane@example.com">
+          </div>
+
+          <div class="field">
+            <label for="county">County *</label>
+            <select
+              id="county"
+              name="entry.901173146"
+              required>
+
+              <option value="" disabled selected>Select County</option>
+              <option value="Nairobi">Nairobi</option>
+              <option value="Bungoma">Bungoma</option>
+              <option value="Kisumu">Kisumu</option>
+              <option value="Nakuru">Nakuru</option>
+              <option value="Other">Other County</option>
+
+            </select>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="interest">I'm interested in *</label>
+          <select
+            id="interest"
+            name="entry.81020440"
+            required>
+
+            <option value="" disabled selected>Select One</option>
+            <option value="Becoming a Youth Leader">Becoming a Youth Leader</option>
+            <option value="Partnering as an Organization">Partnering as an Organization</option>
+            <option value="Supporting the Work">Supporting the Work</option>
+            <option value="General Inquiry">General Inquiry</option>
+
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="message">Message</label>
+          <textarea
+            id="message"
+            name="entry.309249740"
+            rows="4"
+            placeholder="Tell us how you'd like to collaborate..."></textarea>
+        </div>
+
+        <button
+          type="submit"
+          class="btn solid form-submit-btn"
+          id="submit-btn">
+
+          <span>Submit Request</span>
+
+        </button>
+
+      </form>
+
+      <!-- SUCCESS CONFIRMATION STATE -->
+      <div id="form-success" class="form-success-state" style="display: none;">
+        <div class="success-icon">✓</div>
+        <h3>Thank You!</h3>
+        <p>Your message has been received. A representative from Rebuild Trust Kenya will reach out shortly.</p>
+        <button onclick="resetForm()" class="btn">Send Another Message</button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="footer-grid">
+      <!-- Organization Summary -->
+      <div>
+        <h4>Rebuild Trust Kenya</h4>
+        <p style="max-width:32ch; line-height: 1.5; color: #666;">
+          A youth-led preventive peacebuilding and civic engagement initiative. Restoring unity and trust for a peaceful Kenya.
+        </p>
+      </div>
+
+      <!-- Quick Links -->
+      <div>
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="programs.html">Programs</a></li>
+          <li><a href="impact.html">Impact</a></li>
+          <li><a href="get-involved.html">Get Involved</a></li>
+        </ul>
+      </div>
+
+      <!-- Focus Areas -->
+      <div>
+        <h4>Pilot Counties</h4>
+        <ul>
+          <li>Nairobi</li>
+          <li>Bungoma</li>
+          <li>Kisumu</li>
+          <li>Nakuru</li>
+        </ul>
+      </div>
+
+      <!-- Contact Details & Social Handles -->
+      <div>
+        <h4>Connect With Us</h4>
+        <ul style="margin-bottom: 16px;">
+          <li><a href="mailto:info@rebuildtrustkenya.org">info@rebuildtrustkenya.org</a></li>
+          <li><a href="tel:+254780004812">+254 780 004 812</a></li>
+          <li><a href="tel:+254795750596">+254 795 750 596</a></li>
+        </ul>
+
+        <!-- Social Media Badges (Matched & Centered SVGs) -->
+        <div class="social-links-group">
+          <!-- Facebook -->
+          <a href="https://facebook.com" class="social-link facebook" target="_blank" rel="noopener" aria-label="Facebook">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+            </svg>
+          </a>
+
+          <!-- Instagram -->
+          <a href="https://instagram.com/rebuildtrustkenya" class="social-link instagram" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+            </svg>
+          </a>
+
+          <!-- LinkedIn -->
+          <a href="https://linkedin.com" class="social-link linkedin" target="_blank" rel="noopener" aria-label="LinkedIn">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+            </svg>
+          </a>
+
+          <!-- WhatsApp (Perfectly Centered Inner Phone) -->
+          <a href="https://wa.me/254780004812" class="social-link whatsapp" target="_blank" rel="noopener" aria-label="WhatsApp">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414-.074-.124-.272-.198-.57-.347m-5.421 7.461v-.001c-1.808 0-3.582-.486-5.132-1.406l-.368-.219-3.815.999 1.017-3.717-.241-.384a10.016 10.016 0 0 1-1.536-5.352c0-5.526 4.496-10.022 10.024-10.022 2.677 0 5.195 1.044 7.087 2.937a9.96 9.96 0 0 1 2.937 7.086c0 5.528-4.496 10.022-10.024 10.022m9.167-19.19c-2.45-2.451-5.708-3.799-9.173-3.799-7.149 0-12.968 5.819-12.968 12.969 0 2.285.596 4.516 1.729 6.48l-1.836 6.704 6.86-1.799a12.91 12.91 0 0 0 6.21 1.583h.005c7.147 0 12.967-5.819 12.967-12.969 0-3.465-1.348-6.723-3.794-9.168"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Copyright Sub-footer -->
+    <div class="footer-bottom">
+      <span>© 2026 Rebuild Trust Kenya. All rights reserved.</span>
+      <span>Nairobi · Bungoma · Kisumu · Nakuru</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  function showSuccessMessage() {
+    document.getElementById('gform').style.display = 'none';
+    document.getElementById('form-success').style.display = 'flex';
+  }
+
+  function resetForm() {
+    document.getElementById('gform').reset();
+    document.getElementById('gform').style.display = 'flex';
+    document.getElementById('form-success').style.display = 'none';
+    window.submitted = false;
+  }
+</script>
+
+</body>
+</html>
