@@ -1,310 +1,113 @@
-/**
- * REBUILD TRUST KENYA — Main Application Logic
- * Modules:
- * 1. Mobile Navigation
- * 2. Radial Growth Visualization (SVG Network)
- * 3. GSAP & ScrollTrigger Animations
- * 4. Dynamic Auth & User Greeting
- */
+/* REBUILD TRUST KENYA V3.1 — motion, forms, team profiles */
+document.addEventListener('DOMContentLoaded', () => {
+  const nav=document.querySelector('.site-nav');
+  const toggle=document.querySelector('.menu-toggle');
+  const setScrolled=()=>nav&&nav.classList.toggle('scrolled',scrollY>20);
+  setScrolled(); addEventListener('scroll',setScrolled,{passive:true});
+  if(toggle&&nav){toggle.addEventListener('click',()=>{const open=nav.classList.toggle('menu-active');document.body.classList.toggle('menu-open',open);toggle.setAttribute('aria-expanded',open)});nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{nav.classList.remove('menu-active');document.body.classList.remove('menu-open')}))}
 
-document.addEventListener('DOMContentLoaded', function () {
+  // reveal
+  const reveals=document.querySelectorAll('.reveal');
+  if('IntersectionObserver' in window){const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target)}}),{threshold:.1});reveals.forEach(e=>io.observe(e))}else reveals.forEach(e=>e.classList.add('visible'));
 
-  /* ============================================================
-     1. MOBILE NAVIGATION
-     ============================================================ */
-  (function initMobileNav() {
-    var toggle = document.querySelector('.menu-toggle');
-    var nav = document.querySelector('nav.links');
-    if (!toggle || !nav) return;
+  // counters
+  document.querySelectorAll('[data-count]').forEach(el=>{const target=+el.dataset.count;let done=false;const run=()=>{if(done)return;done=true;let t0=performance.now();const step=t=>{let p=Math.min((t-t0)/1500,1),v=1-Math.pow(1-p,4);el.textContent=Math.round(target*v).toLocaleString();if(p<1)requestAnimationFrame(step)};requestAnimationFrame(step)};if('IntersectionObserver'in window){const io=new IntersectionObserver(es=>{if(es[0].isIntersecting){run();io.disconnect()}},{threshold:.5});io.observe(el)}else run()});
 
-    toggle.addEventListener('click', function () {
-      var open = nav.classList.toggle('open');
-      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-    });
-
-    nav.querySelectorAll('a').forEach(function (a) {
-      a.addEventListener('click', function () {
-        nav.classList.remove('open');
-        toggle.setAttribute('aria-expanded', 'false');
-      });
-    });
-  })();
-
-  /* ============================================================
-     2. GROWTH NETWORK VISUALIZATION (RADIAL NODE MAP)
-     ============================================================ */
-  (function initGrowthViz() {
-    var svg = document.getElementById('growth-svg');
-    if (!svg) return;
-
-    var W = 460, H = 460, cx = W / 2, cy = H / 2;
-
-    var rings = [
-      { year: 1, radius: 78,  count: 4,  labels: ['Nairobi', 'Bungoma', 'Kisumu', 'Nakuru'] },
-      { year: 2, radius: 138, count: 6,  labels: [] },
-      { year: 3, radius: 198, count: 10, labels: [] }
+  // Homepage solar-system motion — true orbiting planets, not floating circles.
+  if(window.gsap && document.querySelector('[data-solar]')){
+    const solar=document.querySelector('[data-solar]');
+    const planets=[
+      {el:solar.querySelector('.planet-1'),duration:7,rotation:360},
+      {el:solar.querySelector('.planet-2'),duration:11,rotation:-360},
+      {el:solar.querySelector('.planet-3'),duration:16,rotation:360},
+      {el:solar.querySelector('.planet-4'),duration:20,rotation:-360},
+      {el:solar.querySelector('.planet-5'),duration:13,rotation:360}
     ];
-
-    var svgNS = 'http://www.w3.org/2000/svg';
-    function el(tag, attrs) {
-      var e = document.createElementNS(svgNS, tag);
-      for (var k in attrs) { e.setAttribute(k, attrs[k]); }
-      return e;
+    planets.forEach(p=>{
+      if(!p.el)return;
+      gsap.to(p.el,{rotation:p.rotation,duration:p.duration,repeat:-1,ease:'none',transformOrigin:'0 0'});
+      gsap.to(p.el.querySelector('.planet-dot'),{scale:1.18,duration:1.5+(p.duration/10),repeat:-1,yoyo:true,ease:'sine.inOut'});
+    });
+    gsap.to(solar,{rotate:-4,duration:8,repeat:-1,yoyo:true,ease:'sine.inOut'});
+    // Subtle cursor gravity/parallax.
+    const hero=document.querySelector('.hero-v3');
+    if(hero && matchMedia('(pointer:fine)').matches){
+      hero.addEventListener('pointermove',e=>{
+        const r=hero.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;
+        gsap.to(solar,{x:x*16,y:y*12,duration:.7,ease:'power3.out',overwrite:true});
+      });
+      hero.addEventListener('pointerleave',()=>gsap.to(solar,{x:0,y:0,duration:1,ease:'power3.out'}));
     }
+  }
 
-    svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
-
-    var nodesByYear = { 1: [], 2: [], 3: [] };
-
-    // Draw connecting lines first
-    rings.forEach(function (ring, ringIndex) {
-      var startAngle = ringIndex % 2 === 0 ? -90 : -90 + (360 / ring.count) / 2;
-      for (var i = 0; i < ring.count; i++) {
-        var angle = (startAngle + (360 / ring.count) * i) * (Math.PI / 180);
-        var x = cx + ring.radius * Math.cos(angle);
-        var y = cy + ring.radius * Math.sin(angle);
-
-        var link = el('line', {
-          class: 'link', x1: cx, y1: cy, x2: x, y2: y,
-          'data-year': ring.year
+// homepage kinetic movement
+  if(window.gsap){
+    gsap.registerPlugin(window.ScrollTrigger||{});
+    const q=s=>document.querySelectorAll(s);
+    q('.hero-atmosphere .blob').forEach((b,i)=>gsap.to(b,{x:`random(-50,50)`,y:`random(-35,35)`,scale:`random(.9,1.15)`,duration:4+i,repeat:-1,yoyo:true,ease:'sine.inOut'}));
+    q('.hero-orbit').forEach(el=>gsap.to(el,{y:-18,duration:3.5,repeat:-1,yoyo:true,ease:'sine.inOut'}));
+    q('.orbit-node').forEach((el,i)=>gsap.to(el,{x:`random(-10,10)`,y:`random(-10,10)`,duration:2.2+i*.3,repeat:-1,yoyo:true,ease:'sine.inOut'}));
+    q('.hero-title .word span').forEach((el,i)=>gsap.to(el,{y:0,opacity:1,duration:.9,delay:.12*i,ease:'power4.out'}));
+    // V6 cinematic solar system: each body has its own orbit radius/speed.
+    const solar=document.querySelector('.solar-system');
+    if(solar){
+      const bodies=[
+        ['.body-dialogue',190,0,22],['.body-youth',205,72,30],
+        ['.body-peace',170,150,25],['.body-account',220,218,34],
+        ['.body-inclusion',145,286,20]
+      ];
+      bodies.forEach(([sel,r,start,dur])=>{
+        const el=solar.querySelector(sel);
+        if(!el)return;
+        const proxy={a:start};
+        gsap.to(proxy,{a:start+360,duration:dur,repeat:-1,ease:'none',
+          onUpdate:()=>{
+            const a=proxy.a*Math.PI/180;
+            const x=Math.cos(a)*r, y=Math.sin(a)*r*.62;
+            el.style.transform=`translate(${x}px,${y}px)`;
+          }
         });
-        svg.appendChild(link);
-        nodesByYear[ring.year].push(link);
+      });
+      gsap.to('.solar-orbit-1',{rotation:360,duration:34,repeat:-1,ease:'none'});
+      gsap.to('.solar-orbit-2',{rotation:-360,duration:25,repeat:-1,ease:'none'});
+      gsap.to('.solar-orbit-3',{rotation:360,duration:42,repeat:-1,ease:'none'});
+      gsap.to('.solar-orbit-4',{rotation:-360,duration:18,repeat:-1,ease:'none'});
+      gsap.to('.solar-core',{scale:1.045,duration:2.8,repeat:-1,yoyo:true,ease:'sine.inOut'});
+      gsap.to('.solar-system',{y:-12,duration:4.5,repeat:-1,yoyo:true,ease:'sine.inOut'});
+      if(matchMedia('(pointer:fine)').matches){
+        solar.addEventListener('pointermove',e=>{
+          const r=solar.getBoundingClientRect(), x=(e.clientX-r.left)/r.width-.5, y=(e.clientY-r.top)/r.height-.5;
+          gsap.to(solar,{rotationY:x*7,rotationX:-y*7,duration:.5,ease:'power2.out',overwrite:true});
+        });
+        solar.addEventListener('pointerleave',()=>gsap.to(solar,{rotationY:0,rotationX:0,duration:.8,ease:'power3.out'}));
       }
-    });
-
-    // Draw node circles & text labels
-    rings.forEach(function (ring, ringIndex) {
-      var startAngle = ringIndex % 2 === 0 ? -90 : -90 + (360 / ring.count) / 2;
-      for (var i = 0; i < ring.count; i++) {
-        var angle = (startAngle + (360 / ring.count) * i) * (Math.PI / 180);
-        var x = cx + ring.radius * Math.cos(angle);
-        var y = cy + ring.radius * Math.sin(angle);
-
-        var node = el('circle', {
-          class: 'node', cx: x, cy: y, r: ring.year === 1 ? 7 : 5,
-          fill: ring.year === 1 ? 'var(--rust)' : (ring.year === 2 ? 'var(--ochre)' : 'var(--sage)'),
-          'data-year': ring.year
-        });
-        
-        // Interactive node highlight
-        node.addEventListener('mouseenter', function() {
-          this.setAttribute('r', parseInt(this.getAttribute('r')) + 3);
-        });
-        node.addEventListener('mouseleave', function() {
-          this.setAttribute('r', this.getAttribute('data-year') == 1 ? 7 : 5);
-        });
-
-        svg.appendChild(node);
-        nodesByYear[ring.year].push(node);
-
-        var labelText = ring.labels[i];
-        if (labelText) {
-          var label = el('text', {
-            class: 'node-label', x: x, y: y - 12,
-            'text-anchor': 'middle', 'data-year': ring.year
-          });
-          label.textContent = labelText;
-          svg.appendChild(label);
-          nodesByYear[ring.year].push(label);
-        }
-      }
-    });
-
-    // Draw Central RTK Hub
-    var hub = el('circle', { cx: cx, cy: cy, r: 20, fill: 'var(--ink)' });
-    svg.appendChild(hub);
-    var hubLabel = el('text', {
-      x: cx, y: cy + 4, 'text-anchor': 'middle',
-      fill: 'var(--bg)', 'font-family': 'var(--font-mono)', 'font-size': '9'
-    });
-    hubLabel.textContent = 'RTK';
-    svg.appendChild(hubLabel);
-
-    function showYear(year) {
-      [1, 2, 3].forEach(function (y) {
-        var visible = y <= year;
-        nodesByYear[y].forEach(function (n) {
-          n.style.opacity = visible ? '1' : '0.08';
-        });
-      });
     }
 
-    showYear(1);
+    const track=document.querySelector('.story-track');
+    if(track&&window.ScrollTrigger){gsap.to(track,{x:()=>-(track.scrollWidth-window.innerWidth+80),ease:'none',scrollTrigger:{trigger:'.story-rail',start:'top bottom',end:'bottom top',scrub:1}})}
+    q('.parallax').forEach(el=>gsap.to(el,{y:()=>-60, ease:'none',scrollTrigger:{trigger:el,start:'top bottom',end:'bottom top',scrub:1}}));
+  }
 
-    var tabs = document.querySelectorAll('.growth-tab');
-    var figuresPanels = document.querySelectorAll('[data-year-figures]');
-    tabs.forEach(function (tab) {
-      tab.addEventListener('click', function () {
-        tabs.forEach(function (t) { 
-          t.classList.remove('active'); 
-          t.setAttribute('aria-selected', 'false'); 
-        });
-        tab.classList.add('active');
-        tab.setAttribute('aria-selected', 'true');
-        var year = parseInt(tab.getAttribute('data-year'), 10);
-        showYear(year);
-        figuresPanels.forEach(function (p) {
-          p.hidden = parseInt(p.getAttribute('data-year-figures'), 10) !== year;
-        });
-      });
-    });
-  })();
+  // program tabs
+  const tabs=document.querySelectorAll('.program-index-list button'),details=document.querySelectorAll('.program-detail');
+  tabs.forEach(btn=>btn.addEventListener('click',()=>{tabs.forEach(b=>b.classList.remove('active'));btn.classList.add('active');details.forEach(d=>d.hidden=d.dataset.program!==btn.dataset.program)}));
 
-  /* ============================================================
-     3. GSAP & SCROLLTRIGGER ANIMATIONS
-     ============================================================ */
-  (function initGSAPAnimations() {
-    if (typeof gsap === 'undefined') return;
-
-    if (typeof ScrollTrigger !== 'undefined') {
-      gsap.registerPlugin(ScrollTrigger);
-    }
-
-    // Hero Text Entrance
-    var heroTexts = document.querySelectorAll('[data-gsap="hero-text"] > *');
-    if (heroTexts.length) {
-      gsap.from(heroTexts, {
-        y: 30,
-        opacity: 0,
-        duration: 0.8,
-        stagger: 0.15,
-        ease: 'power2.out'
-      });
-    }
-
-    // Generic Fade Up on Scroll
-    var fadeElements = document.querySelectorAll('[data-gsap="fade-up"]');
-    fadeElements.forEach(function (el) {
-      gsap.from(el, {
-        scrollTrigger: {
-          trigger: el,
-          start: 'top 85%',
-          toggleActions: 'play none none none'
-        },
-        y: 28,
-        opacity: 0,
-        duration: 0.7,
-        ease: 'power2.out'
-      });
-    });
-
-    // Pillar Stagger Animations
-    var pillarContainers = document.querySelectorAll('.pillars');
-    pillarContainers.forEach(function (container) {
-      var pillars = container.querySelectorAll('[data-gsap="pillar"]');
-      if (pillars.length) {
-        gsap.from(pillars, {
-          scrollTrigger: {
-            trigger: container,
-            start: 'top 80%',
-            toggleActions: 'play none none none'
-          },
-          y: 30,
-          opacity: 0,
-          duration: 0.6,
-          stagger: 0.18,
-          ease: 'power2.out'
-        });
-      }
-    });
-  })();
-
-
+  // Google Forms silent submit
+  const form=document.getElementById('gform');
+  if(form){window.submitted=false;form.addEventListener('submit',()=>{window.submitted=true;const b=document.getElementById('submit-btn');if(b){b.disabled=true;b.querySelector('span').textContent='Sending…'}})}
 });
-/* ============================================================
-   REBUILD TRUST KENYA — HOMEPAGE ANIMATIONS
-   ============================================================ */
-document.addEventListener('DOMContentLoaded', function() {
-  if (typeof gsap === 'undefined') return;
 
-  // 1. Kinetic Hero Split Text
-  var splitLines = document.querySelectorAll('.gsap-line span');
-  if (splitLines.length > 0) {
-    gsap.fromTo(splitLines, 
-      { y: '100%', opacity: 0 },
-      { 
-        y: '0%', 
-        opacity: 1, 
-        duration: 1.0, 
-        stagger: 0.12, 
-        ease: 'power3.out',
-        delay: 0.1
-      }
-    );
-  }
+function showSuccessMessage(){const form=document.getElementById('gform'),success=document.getElementById('form-success');if(form&&success){form.style.display='none';success.style.display='block'}window.submitted=false}
+function resetForm(){const form=document.getElementById('gform'),success=document.getElementById('form-success'),b=document.getElementById('submit-btn');if(form&&success){form.reset();form.style.display='grid';success.style.display='none';if(b){b.disabled=false;b.querySelector('span').textContent='Submit Request'}}}
 
-  // 2. Dialogue Motif Pulse & Float Effect
-  var pulseNodes = document.querySelectorAll('.pulse-node');
-  if (pulseNodes.length > 0) {
-    gsap.to(pulseNodes, {
-      y: 'random(-6, 6)',
-      x: 'random(-6, 6)',
-      duration: 'random(2.5, 4)',
-      repeat: -1,
-      yoyo: true,
-      ease: 'sine.easeInOut',
-      stagger: 0.2
-    });
-  }
+// Team modal data is injected into team.html.
+function openBioModal(id){const d=window.teamData&&window.teamData[id];if(!d)return;document.getElementById('modalImg').src=d.img;document.getElementById('modalRole').textContent=d.role;document.getElementById('modalName').textContent=d.name;document.getElementById('modalBio').innerHTML=d.bio;document.getElementById('modalStrength').textContent=d.strength;document.getElementById('bioModal').classList.add('active');document.body.style.overflow='hidden'}
+function closeBioModal(e){const m=document.getElementById('bioModal');if(!m)return;if(e&&e.target!==e.currentTarget&&!e.target.classList.contains('modal-close-btn'))return;m.classList.remove('active');document.body.style.overflow=''}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeBioModal()});
 
-  // 3. Stat Counters Roll-up Trigger
-  var stats = document.querySelectorAll('.stat .n');
-  if (stats.length > 0 && typeof ScrollTrigger !== 'undefined') {
-    stats.forEach(function(stat) {
-      var target = parseFloat(stat.getAttribute('data-target'));
-      if (!target) return;
 
-      gsap.to(stat, {
-        innerText: target,
-        duration: 2.0,
-        ease: 'power2.out',
-        snap: { innerText: 1 },
-        scrollTrigger: {
-          trigger: '.stat-row',
-          start: 'top 85%'
-        }
-      });
-    });
-  }
-
-  // 4. Staggered Pillars Elevation
-  var pillars = document.querySelectorAll('[data-gsap="pillar"]');
-  if (pillars.length > 0 && typeof ScrollTrigger !== 'undefined') {
-    gsap.fromTo(pillars,
-      { y: 40, opacity: 0 },
-      {
-        y: 0,
-        opacity: 1,
-        duration: 0.8,
-        stagger: 0.15,
-        ease: 'power2.out',
-        scrollTrigger: {
-          trigger: '.pillars',
-          start: 'top 80%'
-        }
-      }
-    );
-  }
-
-  // 5. Magnetic CTA Buttons
-  var magnetBtns = document.querySelectorAll('.magnet-btn');
-  magnetBtns.forEach(function(btn) {
-    btn.addEventListener('mousemove', function(e) {
-      var rect = btn.getBoundingClientRect();
-      var x = e.clientX - rect.left - rect.width / 2;
-      var y = e.clientY - rect.top - rect.height / 2;
-
-      gsap.to(btn, {
-        x: x * 0.2,
-        y: y * 0.2,
-        duration: 0.3,
-        ease: 'power2.out'
-      });
-    });
-
-    btn.addEventListener('mouseleave', function() {
-      gsap.to(btn, { x: 0, y: 0, duration: 0.5, ease: 'elastic.out(1, 0.4)' });
-    });
-  });
+/* V7: subtle page entrance, intentionally restrained */
+window.addEventListener("load", () => {
+  if (!window.gsap) return;
+  gsap.to("body", {opacity:1, duration:.45, ease:"power2.out"});
 });
