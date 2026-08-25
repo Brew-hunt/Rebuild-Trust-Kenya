@@ -1,0 +1,380 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><script>(function(){try{var t=localStorage.getItem('rtk-theme');document.documentElement.setAttribute('data-theme',t=='light'?'light':'dark')}catch(e){document.documentElement.setAttribute('data-theme','dark')}})();</script><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="theme.css"><link rel="icon" href="images/favicon/favicon.ico" sizes="any"><link rel="icon" type="image/png" sizes="16x16" href="images/favicon/favicon-16x16.png"><link rel="icon" type="image/png" sizes="32x32" href="images/favicon/favicon-32x32.png"><link rel="icon" type="image/png" sizes="48x48" href="images/favicon/favicon-48x48.png"><link rel="apple-touch-icon" sizes="180x180" href="images/favicon/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><title>About — Rebuild Trust Kenya</title><meta name="description" content="Rebuild Trust Kenya — youth-led preventive peacebuilding and civic engagement."><style>
+/* ===== about.html — page-specific styles (shared design system now lives in css/theme.css) ===== */
+.split-hero-copy .hero-copy{color:var(--muted);max-width:480px}
+.hero-copy{max-width:560px;font-size:.92rem;line-height:1.72}
+.feature-visual::before{content:"";position:absolute;inset:16%;border:1px solid var(--line);border-radius:50%}
+.feature-visual::after{content:"";position:absolute;inset:30%;border:1px dashed var(--line);border-radius:50%}
+.feature-visual .fv-mark{position:relative;z-index:2;width:76px;height:76px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#d9a15b,#5c3317 72%);box-shadow:0 0 0 14px rgba(181,101,29,.07),0 18px 40px rgba(0,0,0,.2)}
+.feature-visual .fv-caption{position:absolute;left:16px;bottom:16px;font:400 .56rem var(--mono);text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.split-hero-copy{background:var(--paper);color:var(--ink);padding:56px;display:flex;flex-direction:column;justify-content:flex-end;position:relative;overflow:hidden}
+.split-hero-copy h1{font-size:clamp(1.9rem,3.6vw,3.1rem);line-height:1.16;margin:16px 0 18px;max-width:580px;position:relative;z-index:2}
+.section-top h2{font-size:clamp(1.9rem,3.6vw,3.6rem);max-width:700px;margin:8px 0 0}
+.editorial-title{font-size:clamp(1.9rem,3.6vw,3.6rem);line-height:1.16;margin:8px 0 20px;max-width:760px}
+.editorial-grid h2:not(.editorial-title){font-size:clamp(1.9rem,3.6vw,3.6rem);margin:8px 0 18px;max-width:700px}
+/* Story rail */
+    .story-rail{overflow:hidden;padding:16px 0 80px;background:var(--bg)}
+.story-track{display:flex;gap:18px;width:max-content;padding-left:max(24px,calc((100vw - 1240px)/2 + 24px));padding-right:24px;box-sizing:content-box}
+.story-card{width:min(370px,75vw);min-height:230px;padding:26px;border:1px solid var(--line);background:var(--paper);display:flex;flex-direction:column;justify-content:space-between;flex:0 0 auto}
+.story-card:nth-child(2){transform:translateY(38px);background:var(--panel-deep);color:#fff;border-color:var(--panel-deep)}
+.story-card:nth-child(3){transform:translateY(-16px)}
+.story-card:nth-child(4){transform:translateY(50px);background:var(--rust);color:#fff;border-color:var(--rust)}
+.v3-section.dark .program-panel{background:var(--panel-deep)}
+.network-caption{position:absolute;left:24px;bottom:22px;font:400 .6rem var(--mono);color:rgba(255,255,255,.55);display:flex;flex-direction:column;gap:4px}
+.network-caption strong{color:#fff;font-family:var(--body);font-size:.8rem;letter-spacing:0;text-transform:none}
+.numbered-list h3{margin:0;font-size:1.3rem;font-weight:800;letter-spacing:-.02em}
+.team-tile:hover{transform:translateY(-6px) rotate(-.3deg);box-shadow:0 22px 48px rgba(0,0,0,.28);border-color:var(--tile-hover-border)}
+/* ===== Heading flourishes ===== */
+    .hl-underline{position:relative;white-space:nowrap;padding-bottom:.06em}
+.hl-underline::after{content:"";position:absolute;left:-2px;right:-4px;bottom:-.08em;height:.16em;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 12'%3E%3Cpath d='M1 8c6-7 13-7 15-1s9 6 15 0 13-7 15-1s9 6 13 1' fill='none' stroke='%23b5651d' stroke-width='2.4' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:repeat-x;background-size:44px 100%;background-position:0 0}
+.pillar-heading{display:flex;flex-wrap:wrap;gap:.28em .34em}
+.pillar-heading span{transition:.25s var(--ease)}
+.pillar-heading span:hover{transform:translateY(-3px)}
+.pillar-heading .p1{color:var(--rust)}
+.pillar-heading .p2{color:var(--ochre)}
+.pillar-heading .p3{color:var(--sage)}
+.pillar-heading .p4{color:var(--ink);opacity:.55}
+.quote-mark{position:relative}
+.quote-mark::before{content:"C";position:absolute;left:-.06em;top:-.5em;font-family:Georgia,'Times New Roman',serif;font-size:2.6em;font-weight:700;line-height:1;color:rgba(255,255,255,.1);z-index:0;pointer-events:none}
+/* ============================================================
+      Responsive — tablet
+      ============================================================ */
+    @media(max-width:980px){
+      .site-nav{width:calc(100% - 24px)}
+      .nav-links{display:none}
+      .menu-toggle{display:flex}
+      .site-nav .nav-links{display:flex;position:fixed;top:76px;left:12px;right:12px;min-height:calc(100svh - 100px);padding:36px 22px;flex-direction:column;justify-content:center;gap:6px;background:var(--nav-mobile-bg);backdrop-filter:blur(18px);border-radius:24px;box-shadow:0 24px 64px rgba(0,0,0,.15);opacity:0;transform:translateY(-14px) scale(.98);pointer-events:none;transition:opacity .32s var(--ease),transform .32s var(--ease);z-index:60}
+      .site-nav.menu-active .nav-links{opacity:1;transform:none;pointer-events:auto}
+      .site-nav .nav-links a{font-size:1.4rem;padding:14px;opacity:0;transform:translateY(8px);transition:opacity .3s ease,transform .3s ease,background .2s,color .2s}
+      .site-nav.menu-active .nav-links a{opacity:1;transform:none}
+      .site-nav.menu-active .nav-links a:nth-child(1){transition-delay:.05s}
+      .site-nav.menu-active .nav-links a:nth-child(2){transition-delay:.1s}
+      .site-nav.menu-active .nav-links a:nth-child(3){transition-delay:.15s}
+      .site-nav.menu-active .nav-links a:nth-child(4){transition-delay:.2s}
+      .site-nav.menu-active .nav-links a:nth-child(5){transition-delay:.25s}
+      .site-nav.menu-active .nav-links a:nth-child(6){transition-delay:.3s}
+      body.menu-open{overflow:hidden}
+
+      .hero-v3{padding-top:118px;min-height:auto;padding-bottom:60px}
+      .hero-layout{grid-template-columns:1fr;gap:44px}
+      .solar-system{width:min(440px,80vw)}
+
+      .v3-section{padding:72px 0}
+      .section-top{flex-direction:column;align-items:flex-start;gap:16px;margin-bottom:36px}
+      .editorial-grid{grid-template-columns:1fr;gap:28px}
+      .icon-badge{width:120px;height:120px;margin:0 auto}
+      .icon-badge svg{width:76px;height:76px}
+      .program-panels{grid-template-columns:repeat(2,1fr)}
+      .metric-wall{grid-template-columns:repeat(2,1fr)}
+      .impact-timeline{grid-template-columns:1fr}
+
+      .program-experience{grid-template-columns:1fr}
+      .program-index-list{position:static;grid-template-columns:repeat(4,1fr)}
+      .program-index-list button{border-left:0;border-bottom:2px solid var(--line);padding:11px 8px}
+
+      .split-hero,.contact-modern{grid-template-columns:1fr}
+      .leader-spotlight{grid-template-columns:1fr}
+      .leader-spotlight-media{min-height:320px}
+      .team-collage{grid-template-columns:repeat(2,1fr)}
+
+      .footer-grid-v5{grid-template-columns:1.2fr .8fr .8fr}
+      .footer-cta{min-height:280px}
+    }
+/* ============================================================
+      Responsive — phone
+      ============================================================ */
+    @media(max-width:620px){
+      .wrap{width:calc(100% - 32px)}
+      .site-nav{top:9px;width:calc(100% - 18px);min-height:64px;padding:5px 7px 5px 10px}
+      .nav-brand img{width:54px;height:54px}
+      .theme-toggle{width:36px;height:36px}
+      .theme-toggle svg{width:16px;height:16px}
+      .nav-brand-copy{font-size:.72rem}
+      .nav-brand-copy small{font-size:.4rem}
+
+      .hero-v3{padding-top:100px;padding-bottom:48px}
+      .hero-title{font-size:clamp(2.6rem,12vw,4rem);line-height:1.1}
+      .hero-copy{font-size:.92rem;line-height:1.7}
+      .hero-scroll-mark{display:none}
+      .solar-system{width:calc(100vw - 40px);margin-top:16px}
+      .solar-core{width:96px;height:96px}
+      .solar-core span{font-size:.82rem}
+      .solar-caption{right:0;bottom:-4%;width:150px}
+      .solar-body{font-size:.48rem;padding:6px 8px}
+
+      .v3-section{padding:56px 0}
+      .section-top h2{font-size:clamp(2.1rem,10vw,3.2rem)}
+      .editorial-title{font-size:clamp(2.1rem,10vw,3.2rem)}
+      .split-band{padding:56px 0}
+
+      .story-track{gap:16px;flex-direction:column;padding:0 4px;width:100%}
+      .story-card{width:100%}
+      .story-card:nth-child(2),.story-card:nth-child(3),.story-card:nth-child(4){transform:none}
+
+      .program-panels,.metric-wall{grid-template-columns:1fr}
+      .program-panel{min-height:auto}
+      .numbered-list .item{grid-template-columns:1fr;gap:8px;padding-left:20px}
+
+      .program-index-list{grid-template-columns:repeat(2,1fr)}
+      .program-detail{padding:26px;min-height:auto}
+      .program-detail .big-letter{font-size:9rem}
+
+      .field-group{grid-template-columns:1fr}
+      .contact-panel{min-height:auto;padding:30px 24px}
+      .form-panel{padding:24px 18px}
+
+      .page-intro{padding:96px 0 40px}
+      .split-hero{min-height:auto}
+      .split-hero-copy{min-height:400px;padding:34px 24px}
+      .split-hero-media{min-height:360px}
+      .split-hero-badge{position:static;margin-top:0;border-radius:0 0 4px 4px}
+      .team-collage{grid-template-columns:1fr;gap:20px}
+      .modal-card{padding:20px}
+      .modal-header{grid-template-columns:1fr;padding-right:0}
+      .modal-header img{width:120px;height:120px}
+      .modal-name{font-size:2.2rem}
+
+      .footer-cta{display:block;min-height:auto;padding:52px 0 32px}
+      .footer-cta-btn{margin-top:24px}
+      .footer-grid-v5{grid-template-columns:1fr 1fr;gap:28px 18px;padding:36px 0}
+      .footer-brand-block{grid-column:1/-1}
+      .footer-bottom{display:block}
+      .footer-bottom span{display:block;margin-top:8px}
+
+      .mentor-card{grid-template-columns:1fr;text-align:center;padding:28px}
+      .mentor-card .mentor-photo{width:140px;margin:0 auto}
+      .leader-spotlight-copy{padding:34px 26px}
+      .leader-spotlight-copy .quote{padding-left:16px}
+    }
+</style><script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script><script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script></head><body><header class="site-nav" aria-label="Primary navigation"><a class="nav-brand" href="index.html"><img src="./images/logo-removebg-preview.png" alt="Rebuild Trust Kenya" width="44" height="44"><span class="nav-brand-copy">Rebuild Trust Kenya<small>Imani Leo. Amani Kesho!</small></span></a><div class="nav-cluster"><nav class="nav-links"><a class="" href="index.html">Home</a><a class="active" href="about.html">About</a><a class="" href="team.html">Our Team</a><a class="" href="programs.html">Programs</a><a class="" href="impact.html">Impact</a><a class="nav-cta" href="get-involved.html#contact-form">Get Involved ↗</a></nav><button class="theme-toggle" id="themeToggle" aria-label="Toggle light and dark theme" title="Toggle theme"><svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v3M12 18.5v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2.5 12h3M18.5 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg><svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a6.8 6.8 0 0 0 10.5 10.5z"/></svg></button><button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false"><span></span><span></span><span></span></button></div></header><main>
+    <section class="page-intro">
+      <div class="wrap split-hero">
+        <div class="split-hero-copy" data-word="ABOUT">
+          <p class="eyebrow">About Us</p>
+          <h1>A youth-led answer to a <span class="hl-underline" style="color:var(--rust)">fragile trust.</span></h1>
+          <p class="hero-copy">Rebuild Trust Kenya exists to close the distance between citizens and the institutions meant to serve them — before that distance turns into conflict.</p>
+        </div>
+        <div class="split-hero-media">
+          <img src="./images/about-hero.png" alt="Founder & Project Director">
+          <span class="split-hero-tag">Youth-Led Initiative</span>
+          <div class="split-hero-badge">
+            <ul class="hero-fact-list">
+              <li>Preventive, not reactive</li>
+              <li>Continuous dialogue, not one-off events</li>
+              <li>Youth-led, not youth-consulted</li>
+              <li>One integrated system</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="split-band">
+      <div class="wrap editorial-grid reveal">
+        <div>
+          <img src="./images/about-community.jpg" alt="Community mobilisation in the field" style="width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:16px">
+        </div>
+        <div>
+          <h2 class="statement">Restoring unity and trust for a peaceful Kenya.</h2>
+          <p>We imagine a Kenya where citizens and leaders trust one another enough to disagree without division — where dialogue, not tension, is the default way disputes are resolved.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="split-band tinted">
+      <div class="wrap editorial-grid reveal" style="grid-template-columns:1.38fr .62fr">
+        <div>
+          <h2 class="statement">Empowering young people to build trust, promote peace and strengthen civic participation.</h2>
+          <p>Young people are Kenya's largest constituency and its most consistent source of civic energy. We equip them with the skills, platforms and standing to lead that work themselves — not as beneficiaries of peace, but as its architects.</p>
+        </div>
+        <div>
+          <img src="./images/about-youth.jpg" alt="Youth peacebuilding facilitation" style="width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:16px">
+        </div>
+      </div>
+    </section>
+
+    <section class="v3-section">
+      <div class="wrap">
+        <div class="section-top reveal">
+          <div>
+            <p class="eyebrow">Our Approach</p>
+            <h2 class="pillar-heading"><span class="p1">Preventive.</span><span class="p2">Continuous.</span><span class="p3">Youth-led.</span><span class="p4">Integrated.</span></h2>
+          </div>
+          <p>We combine dialogue, accountability, civic education and peacebuilding rather than waiting for conflict or political tension to escalate.</p>
+        </div>
+        <div class="numbered-list">
+          <div class="item reveal">
+            <h3>Preventive — Ahead of the fracture</h3>
+            <p>We work before tension turns into conflict, building trust as ongoing maintenance, not emergency repair.</p>
+          </div>
+          <div class="item reveal">
+            <h3>Continuous — Not a one-off event</h3>
+            <p>Monthly dialogue forums and standing coordination structures keep the work going between crises, not just during them.</p>
+          </div>
+          <div class="item reveal">
+            <h3>Youth-led — Led, not consulted</h3>
+            <p>Young people design, facilitate and monitor the work — with elders, leaders and civil society as partners at the table.</p>
+          </div>
+          <div class="item reveal">
+            <h3>Integrated — One system, not four silos</h3>
+            <p>Dialogue surfaces issues, accountability follows through, civic education sustains understanding and youth leadership carries the work county by county.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="v3-section dark">
+      <div class="wrap reveal">
+        <p class="eyebrow" style="color:#d9a15b">Long-Term Outcome</p>
+        <h2 class="statement quote-mark"><span>A generation of engaged, responsible citizens <em style="color:var(--rust);font-style:normal">shaping Kenya's democracy peacefully.</em></span></h2>
+      </div>
+    </section>
+
+    <section class="v3-section">
+      <div class="wrap editorial-grid reveal">
+        <div>
+          <p class="eyebrow">Next</p>
+          <h2>See how the work is structured.</h2>
+        </div>
+        <div>
+          <p>Explore the four activities that connect our preventive peacebuilding model from the first conversation to long-term youth leadership.</p>
+          <a class="v3-btn primary" href="programs.html">View the programs →</a>
+        </div>
+      </div>
+    </section>
+  </main><footer class="v3-footer v5-footer"><div class="wrap"><div class="footer-cta"><div><p class="eyebrow" style="color:#d9a15b">The work continues</p><h2>Let's rebuild<br><em>trust together.</em></h2></div><a class="v3-btn footer-cta-btn" href="get-involved.html#contact-form">Get involved ↗</a></div><div class="footer-grid-v5"><div class="footer-brand-block"><div class="footer-mark">RTK</div><p>A youth-led preventive peacebuilding and civic engagement initiative restoring unity, trust and accountability for a peaceful Kenya.</p><div class="footer-social"><a href="https://www.facebook.com/share/1P53ZAwPmE/" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a><a href="https://www.instagram.com/rebuildtrustkenya" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a><a href="https://www.linkedin.com/feed/update/urn:li:activity:7490450553605566464" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a><a href="https://wa.me/254780004812" target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.29-1.39a9.87 9.87 0 0 0 4.75 1.21h.01c5.46 0 9.9-4.45 9.9-9.91C21.96 6.45 17.5 2 12.04 2zm5.8 14.11c-.24.68-1.4 1.3-1.93 1.38-.5.08-1.12.11-1.8-.11-.42-.13-.96-.3-1.65-.6-2.9-1.25-4.79-4.17-4.94-4.36-.14-.19-1.18-1.57-1.18-3s.75-2.13 1.02-2.42c.27-.29.58-.36.77-.36h.55c.18 0 .42-.07.65.5.24.58.81 2 .88 2.14.07.15.12.32.02.51-.1.19-.15.31-.3.48-.15.17-.31.38-.44.51-.15.15-.3.31-.13.61.17.29.75 1.24 1.62 2.01 1.11.99 2.05 1.3 2.35 1.44.3.15.47.13.65-.08.18-.21.75-.87.95-1.17.2-.3.4-.25.67-.15.27.1 1.72.81 2.02.96.3.15.5.22.57.35.07.13.07.75-.17 1.43z"/></svg></a><a href="mailto:info@rebuildtrustkenya.org" aria-label="Email"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></svg></a></div></div><div class="footer-links"><span class="eyebrow" style="color:#d9a15b">Explore</span><a href="index.html">Home</a><a href="about.html">About Us</a><a href="team.html">Our Team</a><a href="programs.html">Programs</a><a href="impact.html">Impact</a><a href="get-involved.html#contact-form">Get Involved</a></div><div class="footer-links"><span class="eyebrow" style="color:#d9a15b">Where we work</span><a>Nairobi</a><a>Bungoma</a><a>Kisumu</a><a>Nakuru</a></div><div class="footer-links"><span class="eyebrow" style="color:#d9a15b">Contact</span><a href="mailto:info@rebuildtrustkenya.org">info@rebuildtrustkenya.org</a><a href="tel:+254780004812">+254 780 004 812</a><a href="tel:+254795750596">+254 795 750 596</a></div></div><div class="footer-bottom"><span>© 2026 Rebuild Trust Kenya. All rights reserved.</span><span>Imani Leo. Amani Kesho!</span></div></div></footer><script defer>
+
+/* REBUILD TRUST KENYA V3.1 — motion, forms, team profiles */
+document.addEventListener('DOMContentLoaded', () => {
+  // theme toggle (light / dark)
+  const themeBtn=document.getElementById('themeToggle');
+  if(themeBtn){
+    themeBtn.addEventListener('click',()=>{
+      const next=document.documentElement.getAttribute('data-theme')==='light'?'dark':'light';
+      document.documentElement.setAttribute('data-theme',next);
+      try{localStorage.setItem('rtk-theme',next)}catch(e){}
+    });
+  }
+
+  // graceful fallback for images not yet supplied by the client
+  document.querySelectorAll('img[data-fallback-label]').forEach(img=>{
+    img.addEventListener('error', function(){
+      this.style.display='none';
+      const ph=this.nextElementSibling;
+      if(ph && ph.classList.contains('img-placeholder')) ph.style.display='grid';
+    }, {once:true});
+  });
+
+  const nav=document.querySelector('.site-nav');
+  const toggle=document.querySelector('.menu-toggle');
+  const setScrolled=()=>nav&&nav.classList.toggle('scrolled',scrollY>20);
+  setScrolled(); addEventListener('scroll',setScrolled,{passive:true});
+  if(toggle&&nav){toggle.addEventListener('click',()=>{const open=nav.classList.toggle('menu-active');document.body.classList.toggle('menu-open',open);toggle.setAttribute('aria-expanded',open)});nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{nav.classList.remove('menu-active');document.body.classList.remove('menu-open')}))}
+
+  // reveal
+  const reveals=document.querySelectorAll('.reveal');
+  if('IntersectionObserver' in window){const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target)}}),{threshold:.1});reveals.forEach(e=>io.observe(e))}else reveals.forEach(e=>e.classList.add('visible'));
+
+  // counters
+  document.querySelectorAll('[data-count]').forEach(el=>{const target=+el.dataset.count;let done=false;const run=()=>{if(done)return;done=true;let t0=performance.now();const step=t=>{let p=Math.min((t-t0)/1500,1),v=1-Math.pow(1-p,4);el.textContent=Math.round(target*v).toLocaleString();if(p<1)requestAnimationFrame(step)};requestAnimationFrame(step)};if('IntersectionObserver'in window){const io=new IntersectionObserver(es=>{if(es[0].isIntersecting){run();io.disconnect()}},{threshold:.5});io.observe(el)}else run()});
+
+  // Homepage solar-system motion — true orbiting planets, not floating circles.
+  if(window.gsap && document.querySelector('[data-solar]')){
+    const solar=document.querySelector('[data-solar]');
+    const planets=[
+      {el:solar.querySelector('.planet-1'),duration:7,rotation:360},
+      {el:solar.querySelector('.planet-2'),duration:11,rotation:-360},
+      {el:solar.querySelector('.planet-3'),duration:16,rotation:360},
+      {el:solar.querySelector('.planet-4'),duration:20,rotation:-360},
+      {el:solar.querySelector('.planet-5'),duration:13,rotation:360}
+    ];
+    planets.forEach(p=>{
+      if(!p.el)return;
+      gsap.to(p.el,{rotation:p.rotation,duration:p.duration,repeat:-1,ease:'none',transformOrigin:'0 0'});
+      gsap.to(p.el.querySelector('.planet-dot'),{scale:1.18,duration:1.5+(p.duration/10),repeat:-1,yoyo:true,ease:'sine.inOut'});
+    });
+    gsap.to(solar,{rotate:-4,duration:8,repeat:-1,yoyo:true,ease:'sine.inOut'});
+    // Subtle cursor gravity/parallax.
+    const hero=document.querySelector('.hero-v3');
+    if(hero && matchMedia('(pointer:fine)').matches){
+      hero.addEventListener('pointermove',e=>{
+        const r=hero.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;
+        gsap.to(solar,{x:x*16,y:y*12,duration:.7,ease:'power3.out',overwrite:true});
+      });
+      hero.addEventListener('pointerleave',()=>gsap.to(solar,{x:0,y:0,duration:1,ease:'power3.out'}));
+    }
+  }
+
+// homepage kinetic movement
+  if(window.gsap){
+    gsap.registerPlugin(window.ScrollTrigger||{});
+    const q=s=>document.querySelectorAll(s);
+    q('.hero-atmosphere .blob').forEach((b,i)=>gsap.to(b,{x:`random(-50,50)`,y:`random(-35,35)`,scale:`random(.9,1.15)`,duration:4+i,repeat:-1,yoyo:true,ease:'sine.inOut'}));
+    q('.hero-orbit').forEach(el=>gsap.to(el,{y:-18,duration:3.5,repeat:-1,yoyo:true,ease:'sine.inOut'}));
+    q('.orbit-node').forEach((el,i)=>gsap.to(el,{x:`random(-10,10)`,y:`random(-10,10)`,duration:2.2+i*.3,repeat:-1,yoyo:true,ease:'sine.inOut'}));
+    q('.hero-title .word span').forEach((el,i)=>gsap.to(el,{y:0,opacity:1,duration:.9,delay:.12*i,ease:'power4.out'}));
+    // V6 cinematic solar system: each body has its own orbit radius/speed.
+    const solar=document.querySelector('.solar-system');
+    if(solar){
+      const bodies=[
+        ['.body-dialogue',190,0,22],['.body-youth',205,72,30],
+        ['.body-peace',170,150,25],['.body-account',220,218,34],
+        ['.body-inclusion',145,286,20]
+      ];
+      bodies.forEach(([sel,r,start,dur])=>{
+        const el=solar.querySelector(sel);
+        if(!el)return;
+        const proxy={a:start};
+        gsap.to(proxy,{a:start+360,duration:dur,repeat:-1,ease:'none',
+          onUpdate:()=>{
+            const a=proxy.a*Math.PI/180;
+            const x=Math.cos(a)*r, y=Math.sin(a)*r*.62;
+            el.style.transform=`translate(${x}px,${y}px)`;
+          }
+        });
+      });
+      gsap.to('.solar-orbit-1',{rotation:360,duration:34,repeat:-1,ease:'none'});
+      gsap.to('.solar-orbit-2',{rotation:-360,duration:25,repeat:-1,ease:'none'});
+      gsap.to('.solar-orbit-3',{rotation:360,duration:42,repeat:-1,ease:'none'});
+      gsap.to('.solar-orbit-4',{rotation:-360,duration:18,repeat:-1,ease:'none'});
+      gsap.to('.solar-core',{scale:1.045,duration:2.8,repeat:-1,yoyo:true,ease:'sine.inOut'});
+      gsap.to('.solar-system',{y:-12,duration:4.5,repeat:-1,yoyo:true,ease:'sine.inOut'});
+      if(matchMedia('(pointer:fine)').matches){
+        solar.addEventListener('pointermove',e=>{
+          const r=solar.getBoundingClientRect(), x=(e.clientX-r.left)/r.width-.5, y=(e.clientY-r.top)/r.height-.5;
+          gsap.to(solar,{rotationY:x*7,rotationX:-y*7,duration:.5,ease:'power2.out',overwrite:true});
+        });
+        solar.addEventListener('pointerleave',()=>gsap.to(solar,{rotationY:0,rotationX:0,duration:.8,ease:'power3.out'}));
+      }
+    }
+
+    q('.parallax').forEach(el=>gsap.to(el,{y:()=>-60, ease:'none',scrollTrigger:{trigger:el,start:'top bottom',end:'bottom top',scrub:1}}));
+  }
+
+  // program tabs
+  const tabs=document.querySelectorAll('.program-index-list button'),details=document.querySelectorAll('.program-detail');
+  tabs.forEach(btn=>btn.addEventListener('click',()=>{tabs.forEach(b=>b.classList.remove('active'));btn.classList.add('active');details.forEach(d=>d.hidden=d.dataset.program!==btn.dataset.program)}));
+
+  // Google Forms silent submit
+  const form=document.getElementById('gform');
+  if(form){window.submitted=false;form.addEventListener('submit',()=>{window.submitted=true;const b=document.getElementById('submit-btn');if(b){b.disabled=true;b.querySelector('span').textContent='Sending…'}})}
+});
+
+function showSuccessMessage(){const form=document.getElementById('gform'),success=document.getElementById('form-success');if(form&&success){form.style.display='none';success.style.display='block'}window.submitted=false}
+function resetForm(){const form=document.getElementById('gform'),success=document.getElementById('form-success'),b=document.getElementById('submit-btn');if(form&&success){form.reset();form.style.display='grid';success.style.display='none';if(b){b.disabled=false;b.querySelector('span').textContent='Submit Request'}}}
+
+// Team modal data is injected into team.html.
+function openBioModal(id){const d=window.teamData&&window.teamData[id];if(!d)return;document.getElementById('modalImg').src=d.img;document.getElementById('modalRole').textContent=d.role;document.getElementById('modalName').textContent=d.name;document.getElementById('modalBio').innerHTML=d.bio;document.getElementById('modalStrength').textContent=d.strength;const locEl=document.getElementById('modalLocation');if(locEl)locEl.textContent=d.location||'';const liBtn=document.getElementById('modalLinkedin');if(liBtn){if(d.linkedin){liBtn.href=d.linkedin;liBtn.style.display='inline-flex'}else{liBtn.style.display='none'}}document.getElementById('bioModal').classList.add('active');document.body.style.overflow='hidden'}
+function closeBioModal(e){const m=document.getElementById('bioModal');if(!m)return;if(e&&e.target!==e.currentTarget&&!e.target.classList.contains('modal-close-btn'))return;m.classList.remove('active');document.body.style.overflow=''}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeBioModal()});
+
+
+/* V7: subtle page entrance, intentionally restrained */
+window.addEventListener("load", () => {
+  if (!window.gsap) return;
+  gsap.to("body", {opacity:1, duration:.45, ease:"power2.out"});
+});
+
+
+</script></body></html>
